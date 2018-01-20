@@ -24,7 +24,7 @@ axios.get(geocodeUrl).then((response) => {
 
   var lat = response.data.results[0].geometry.location.lat;
   var lng = response.data.results[0].geometry.location.lng;
-  var weatherUrl = `https://api.forecast.io/forecast/4a04d1c42fd9d32c97a2c291a32d5e2d/${lat},${lng}`;
+  var weatherUrl = `https://api.forecast.io/forecast/a46eff3ada73b7f3dbd490c2ec0d0710/${lat},${lng}`;
   console.log(response.data.results[0].formatted_address);
   return axios.get(weatherUrl);
 }).then((response) => {
