@@ -1,14 +1,16 @@
 const utils = require("./utils");
+const expect = require("expect");
 it("should add two numbers", () => {
     var res = utils.add(12, 13);
-    if(res != 25) {
-        throw new Error(`Expecting 25 but got ${res}`);
-    }
+    expect(res).toBe(25);
 });
 
 it("should Square a number", () => {
     var res = utils.square(9);
-    if(res != 81) {
-        throw new Error(`Expecting 81 but got ${res}`);
-    }
+    expect(res).toBe(81);
+});
+
+it("should have some values", () => {
+    var res = utils.square(9);
+    expect([2,3,4]).toEqual([2,3,4]);
 });
