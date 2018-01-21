@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require("hbs");
+const fs = require('fs');
 
 var app = express();
 app.set("view engine","hbs");
@@ -14,6 +15,18 @@ hbs.registerHelper('screamIt', (text) => {
 })
 
 app.use(express.static(__dirname+"/public/"));
+
+app.use((req, res, next) => {
+    var now = new Date().toString();
+    var log = `${now}: ${req.method} ${req.path}`;
+    fs.appendFile('server.log', log+"\n", (err) => {
+        if(err) {
+            console.log("unable log");
+        }
+    });
+    res.render('maintainance.hbs');
+    // next();
+})
 app.get("/", (req, res) => {
     // res.send("<h1>Hello express</h1>");
     res.render('home.hbs', {
