@@ -5,6 +5,13 @@ it("should add two numbers", () => {
     expect(res).toBe(25);
 });
 
+it("should add two numbers async", (done) => {
+    var res = utils.asyncAdd(12, 13 , (sum) => {
+        expect(sum).toBe(25);
+        done();
+    });
+});
+
 it("should Square a number", () => {
     var res = utils.square(9);
     expect(res).toBe(81);
