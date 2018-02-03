@@ -20,15 +20,14 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('newMessage', generateMessage("admin", "New user joined the chat"));
 
     socket.on("createMessage", (message, callback) => {
-        console.log("create message", message);
-        
-
         io.emit('newMessage', generateMessage(message.from, message.text)); 
-        
-        // socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
         callback("got it");
     });
 
+    socket.on("createLocationMessage", (message, callback) => {
+        io.emit('newMessage', generateMessage("admin", `${message.latitude}, ${message.longitude}`)); 
+        callback("got it");
+    });
 });
 
 server.listen(port, () => {

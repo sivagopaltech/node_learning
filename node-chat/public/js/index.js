@@ -22,3 +22,20 @@ $("#messageForm").on("submit", function(e){
         console.log(data);
     });
 });
+
+$("#sendLocation").on("click", function(){
+    if(!navigator.geolocation) {
+        return alert("No geo location");
+    }
+
+    navigator.geolocation.getCurrentPosition(function(position){
+        socket.emit("createLocationMessage", {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        }, function(data){
+            console.log(data);
+        });
+    }, function () {
+        alert("unable to fetch location");
+    });
+});
