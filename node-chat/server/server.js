@@ -9,7 +9,7 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
-var {generateMessage} = require("./utils/message");
+var {generateMessage, generateLocationMessage} = require("./utils/message");
 
 app.use(express.static(publicPath));
 
@@ -24,8 +24,8 @@ io.on("connection", (socket) => {
         callback("got it");
     });
 
-    socket.on("createLocationMessage", (message, callback) => {
-        io.emit('newMessage', generateMessage("admin", `${message.latitude}, ${message.longitude}`)); 
+    socket.on("createLocationMessage", (coords, callback) => {
+        io.emit('newLocationMessage', generateLocationMessage("admin", coords.latitude, coords.longitude)); 
         callback("got it");
     });
 });
