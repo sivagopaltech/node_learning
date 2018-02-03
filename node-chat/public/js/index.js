@@ -21,17 +21,17 @@ socket.on("newLocationMessage", function(message) {
 
 
 
-$("#messageForm").on("submit", function(e){
+$("#message-form").on("submit", function(e){
     e.preventDefault();
     socket.emit("createMessage", {
         from: "User",
         text: $("#message").val()
     }, function(data){
-        console.log(data);
+        $("#message").val("");
     });
 });
 
-$("#sendLocation").on("click", function(){
+$("#send-location").on("click", function(){
     if(!navigator.geolocation) {
         return alert("No geo location");
     }
