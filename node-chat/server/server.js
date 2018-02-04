@@ -22,13 +22,13 @@ io.on("connection", (socket) => {
         if (!isRealString(params.name) || !isRealString(params.room)) {
             callback('Name and room name are required.');
         }
-        callback();
+        socket.join(params.room)
+        socket.emit('newMessage', generateMessage("admin", "Welcone to the chat app")); 
+        socket.broadcast.to(params.room).emit('newMessage', generateMessage("admin", "New user joined the chat"));
     });
 
-    socket.emit('newMessage', generateMessage("admin", "Welcone to the chat app")); 
-
-    socket.broadcast.emit('newMessage', generateMessage("admin", "New user joined the chat"));
-
+    
+ 
     socket.on("createMessage", (message, callback) => {
         io.emit('newMessage', generateMessage(message.from, message.text)); 
         callback("got it");
